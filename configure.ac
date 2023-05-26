@@ -882,6 +882,9 @@ lib/python/Plugins/Extensions/SocketMMI/meta/Makefile
 lib/python/Plugins/Extensions/SocketMMI/src/Makefile
 lib/python/Plugins/Extensions/TuxboxPlugins/Makefile
 lib/python/Plugins/Extensions/TuxboxPlugins/meta/Makefile
+lib/python/Plugins/Extensions/IPTV/Makefile
+lib/python/Plugins/Extensions/IPTV/locale/de/LC_MESSAGES/Makefile
+lib/python/Plugins/Extensions/IPTV/locale/ru/LC_MESSAGES/Makefile
 lib/python/Plugins/Extensions/QuadPip/Makefile
 lib/python/Plugins/Extensions/StreamlinkWrapper/Makefile
 lib/python/Plugins/Extensions/YTDLWrapper/Makefile

@@ -1,0 +1,116 @@
+<!--
+flags="m" - onKeyDown
+flags="l" - onKeyLongPress
+flags="b" - onKeyUp
+flags="r" - onKeyRepeat
+-->
+<keymap>
+
+	<!-- Some images has not all DirectionActions -->
+	<map context="TListActions">
+		<key id="KEY_UP" mapto="up" flags="mr" />
+		<key id="KEY_UP" mapto="keyReleased" flags="b" />
+		<key id="KEY_DOWN" mapto="down" flags="mr" />
+		<key id="KEY_DOWN" mapto="keyReleased" flags="b" />
+		<key id="KEY_PAGEUP" mapto="pageUp" flags="mr" />
+		<key id="KEY_PAGEUP" mapto="keyReleased" flags="b" />
+		<key id="KEY_CHANNELUP" mapto="pageUp" flags="mr" />
+		<key id="KEY_CHANNELUP" mapto="keyReleased" flags="b" />
+		<key id="KEY_PAGEDOWN" mapto="pageDown" flags="mr" />
+		<key id="KEY_PAGEDOWN" mapto="keyReleased" flags="b" />
+		<key id="KEY_CHANNELDOWN" mapto="pageDown" flags="mr" />
+		<key id="KEY_CHANNELDOWN" mapto="keyReleased" flags="b" />
+	</map>
+	
+	<map context="TDirectionActions">
+		<key id="KEY_UP" mapto="up" flags="mr" />
+		<key id="KEY_UP" mapto="keyReleased" flags="b" />
+		<key id="KEY_DOWN" mapto="down" flags="mr" />
+		<key id="KEY_DOWN" mapto="keyReleased" flags="b" />
+		<key id="KEY_LEFT" mapto="left" flags="mr" />
+		<key id="KEY_LEFT" mapto="keyReleased" flags="b" />
+		<key id="KEY_RIGHT" mapto="right" flags="mr" />
+		<key id="KEY_RIGHT" mapto="keyReleased" flags="b" />
+		<key id="KEY_PAGEUP" mapto="pageUp" flags="mr" />
+		<key id="KEY_PAGEUP" mapto="keyReleased" flags="b" />
+		<key id="KEY_CHANNELUP" mapto="pageUp" flags="mr" />
+		<key id="KEY_CHANNELUP" mapto="keyReleased" flags="b" />
+		<key id="KEY_PAGEDOWN" mapto="pageDown" flags="mr" />
+		<key id="KEY_PAGEDOWN" mapto="keyReleased" flags="b" />
+		<key id="KEY_CHANNELDOWN" mapto="pageDown" flags="mr" />
+		<key id="KEY_CHANNELDOWN" mapto="keyReleased" flags="b" />
+	</map>
+
+	<map context="TPluginActions">
+		<key id="KEY_TV" mapto="close" flags="m" />
+		<key id="KEY_STOP" mapto="stop" flags="m"/>
+		<key id="KEY_POWER" mapto="power" flags="b"/>
+		<key id="KEY_POWER" mapto="powerMenu" flags="l"/>
+		<key id="KEY_WWW" mapto="goHome" flags="m"/>
+	</map>
+
+	<map context="TInfoActions">
+		<key id="KEY_INFO" mapto="info" flags="m" />
+	</map>
+
+	<map context="TSearchActions">
+		<key id="KEY_TEXT" mapto="search" flags="m" />
+	</map>
+
+	<map context="TVideosActions">
+		<key id="KEY_PLAYPAUSE" mapto="playpause" flags="m" />
+		<key id="KEY_PAUSE" mapto="pause" flags="m" />
+		<key id="KEY_PLAY" mapto="play" flags="m" />
+		<key id="KEY_INFO" mapto="info" flags="m" />
+		<key id="KEY_NEXT" mapto="next" flags="m" />
+		<key id="KEY_PREVIOUS" mapto="prev" flags="m" />
+	</map>
+
+	<map context="TSeekActions">
+		<key id="KEY_LEFT" mapto="seekLeft" flags="mr" />
+		<key id="KEY_RIGHT" mapto="seekRight" flags="mr" />
+		<key id="KEY_REWIND" mapto="seekRwd" flags="m"/>
+		<key id="KEY_FASTFORWARD" mapto="seekFwd" flags="m"/>
+		<key id="KEY_PREVIOUSSONG" mapto="seekRwdLong" flags="m"/>
+		<key id="KEY_NEXTSONG" mapto="seekFwdLong" flags="m"/>
+	</map>
+
+    <map context="TEpgListActions">
+        <key id="KEY_PREVIOUS" mapto="prevDay" flags="b" />
+        <key id="KEY_NEXT" mapto="nextDay" flags="b" />
+    </map>
+
+	<map context="TSortActions">
+        <key id="KEY_PREVIOUS" mapto="moveUp" flags="b" />
+        <key id="KEY_NEXT" mapto="moveDown" flags="b" />
+		<key id="KEY_REWIND" mapto="moveUp" flags="m"/>
+		<key id="KEY_FASTFORWARD" mapto="moveDown" flags="m"/>
+    </map>
+
+	<map context="THistoryActions">
+		<key id="KEY_LIST" mapto="openHistory" flags="m"/>
+		<key id="KEY_EPG" mapto="openHistory" flags="m"/>
+	</map>
+
+	<map context="TChannelActions">
+		<key id="KEY_UP" mapto="prevChannel" flags="m" />
+		<key id="KEY_DOWN" mapto="nextChannel" flags="m" />
+		<key id="KEY_INFO" mapto="info" flags="m" />
+		<key id="KEY_PREVIOUS" mapto="prevProgram" flags="mr" />
+		<key id="KEY_NEXT" mapto="nextProgram" flags="mr" />
+		<key id="KEY_BACK" mapto="historyBack" flags="mr" />
+		<key id="KEY_FORWARD" mapto="historyNext" flags="mr" />
+		<key id="KEY_CHANNELUP" mapto="prevChannel" flags="m" />
+		<key id="KEY_CHANNELDOWN" mapto="nextChannel" flags="m" />
+		<key id="KEY_PLAYPAUSE" mapto="playpause" flags="m" />
+		<key id="KEY_PAUSE" mapto="pause" flags="m" />
+		<key id="KEY_PLAY" mapto="play" flags="m" />
+	</map>
+
+	<map context="TVideoModeActions">
+		<key id="KEY_VIDEO" mapto="vmode" flags="m"/>
+		<key id="KEY_VMODE" mapto="vmode" flags="m"/>
+		<key id="KEY_MODE" mapto="vmode" flags="m"/>
+	</map>
+
+</keymap>

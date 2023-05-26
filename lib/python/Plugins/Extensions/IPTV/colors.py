@@ -1,0 +1,37 @@
+# uncompyle6 version 3.9.0
+# Python bytecode version base 2.7 (62211)
+# Decompiled from: Python 3.10.6 (main, Mar 10 2023, 10:55:28) [GCC 11.3.0]
+# Embedded file name: src/colors.py
+# Compiled at: 2022-09-26 18:45:58
+colors = {'bg': 131848, 'bgwin': 236065298, 
+   'bgsel': 10978336, 
+   'fgbig': 14080496, 
+   'fgdark': 10855874, 
+   'fgsel': 16758877, 
+   'bgframe': 1583188, 
+   'bgplane': 101847570, 
+   'bgwall': 1342770200, 
+   'fgwall': 16693623, 
+   'blue1': 12699619, 
+   'blue2': 12044526, 
+   'blue3': 11322348, 
+   'brd': 10001855, 
+   'gold2': 16753245, 
+   'gold3': 16751957, 
+   'kblue': 1513353, 
+   'kgreen': 2062111, 
+   'kred': 10096656, 
+   'kyellow': 10651648, 
+   'none': 4278190080, 
+   'prog': 16777215, 
+   'scrl': 3818086, 
+   'snow': 13290963, 
+   'unff': 255, 
+   'white': 16777215, 
+   'white1': 553648127, 
+   'white2': 905969663, 
+   'white3': 2164260863, 
+   'gray': 5855577, 
+   'darkgray': 5263440, 
+   'gridsel': 12488239, 
+   'ared': 14438689}
