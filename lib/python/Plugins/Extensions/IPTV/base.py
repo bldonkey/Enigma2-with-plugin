@@ -11,7 +11,7 @@ except ImportError:
 
 from twisted.internet.protocol import Protocol
 from twisted.web.error import Error as WebError
-from twisted.web.client import getPage as _getPage, downloadPage as _downloadPage, Agent, HTTPConnectionPool, readBody, Response, ResponseDone, ResponseFailed, RequestTransmissionFailed, RequestNotSent
+from twisted.web.client import Agent, HTTPConnectionPool, readBody, Response, ResponseDone, ResponseFailed, RequestTransmissionFailed, RequestNotSent
 from twisted.web.http_headers import Headers
 from twisted.internet.error import ConnectError, DNSLookupError, ConnectionClosed, ConnectingCancelledError
 from twisted.internet.defer import CancelledError, Deferred, succeed
@@ -71,11 +71,37 @@ class HttpService(object):
         model = getBoxModel()
         self.user_agent = 'enigma2/%s %s' % (VERSION, model)
 
+
     def getPage(self, url):
-        return _getPage(url, agent=self.user_agent)
+        agent = Agent(reactor)
+        requested = agent.request(
+            b'GET',
+            url,
+            Headers({'User-Agent': [self.user_agent]}),
+            None)
+        return requested
 
     def downloadPage(self, url, filename):
-        return _downloadPage(url, filename, agent=self.user_agent)
+        # def __init__(self):
+        #     self.url = url
+        #     self.filename = filename
+
+        # def saveFile(self, data):
+        #     file = open(self.filename, 'wb')
+        #     file.write(data)
+
+        def saveFile(result):
+            with open(filename, 'wb') as f:
+                f.write(result)
+
+        agent = Agent(reactor)
+        requested = agent.request(
+            b'GET',
+            url,
+            Headers({'User-Agent': [self.user_agent]}),
+            None)
+        return requested.addCallback(readBody).addCallback(saveFile)
+
 
 
 class HttpAgent(object):

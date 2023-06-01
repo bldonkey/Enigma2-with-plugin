@@ -6,11 +6,12 @@ Do plugin updates, should be simple and reliable.
 Must work if main plugin got broken after update.
 Therefore we want to have as less imports as possible
 """
-
+from twisted.internet import reactor
+from twisted.web.client import Agent, readBody
+from twisted.web.http_headers import Headers
 from enigma import quitMainloop
 from Components.Console import Console
 from Screens.MessageBox import MessageBox
-from twisted.web.client import getPage as _getPage, downloadPage as _downloadPage
 from twisted.internet.defer import Deferred, fail
 from . import NAME, VERSION
 from .layer import enigma2Qt, eTimer
