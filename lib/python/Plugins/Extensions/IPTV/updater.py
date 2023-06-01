@@ -30,11 +30,35 @@ def fatalError(err):
 
 
 def getPage(url):
-    return _getPage(url, agent='enigma2/%s' % VERSION).addErrback(twistedError)
+    agent = Agent(reactor)
+    requested = agent.request(
+        b'GET',
+        url,
+        Headers({'User-Agent': ['enigma2/%s' % VERSION]}),
+        None)
+    return requested.addErrback(twistedError)
 
 
 def downloadPage(url, filename):
-    return _downloadPage(url, filename, agent='enigma2/%s' % VERSION).addErrback(twistedError)
+    # def __init__(self):
+    #     self.url = url
+    #     self.filename = filename
+
+    # def saveFile(self, data):
+    #     file = open(self.filename, 'wb')
+    #     file.write(data)
+
+    def saveFile(result):
+        with open(filename, 'wb') as f:
+            f.write(result)
+
+    agent = Agent(reactor)
+    requested = agent.request(
+        b'GET',
+        url,
+        Headers({'User-Agent': ['enigma2/%s' % VERSION]}),
+        None)
+    return requested.addCallback(readBody).addCallback(saveFile).addErrback(twistedError)
 
 
 def twistedError(err):
