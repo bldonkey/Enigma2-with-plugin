@@ -31,10 +31,11 @@ def fatalError(err):
 
 def getPage(url):
     agent = Agent(reactor)
+    url = url.encode("ascii")
     requested = agent.request(
         b'GET',
         url,
-        Headers({'User-Agent': ['enigma2/%s' % VERSION]}),
+        Headers({'User-Agent': [('enigma2/%s' % VERSION).encode("ascii")]}),
         None)
     return requested.addErrback(twistedError)
 
@@ -53,10 +54,11 @@ def downloadPage(url, filename):
             f.write(result)
 
     agent = Agent(reactor)
+    url = url.encode("ascii")
     requested = agent.request(
         b'GET',
         url,
-        Headers({'User-Agent': ['enigma2/%s' % VERSION]}),
+        Headers({'User-Agent': [('enigma2/%s' % VERSION).encode("ascii")]}),
         None)
     return requested.addCallback(readBody).addCallback(saveFile).addErrback(twistedError)
 

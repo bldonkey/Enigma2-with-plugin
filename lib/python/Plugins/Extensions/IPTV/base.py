@@ -69,11 +69,12 @@ class HttpService(object):
 
     def __init__(self):
         model = getBoxModel()
-        self.user_agent = 'enigma2/%s %s' % (VERSION, model)
+        self.user_agent = ('enigma2/%s %s' % (VERSION, model)).encode("ascii")
 
 
     def getPage(self, url):
         agent = Agent(reactor)
+        url = url.encode("ascii")
         requested = agent.request(
             b'GET',
             url,
@@ -95,6 +96,7 @@ class HttpService(object):
                 f.write(result)
 
         agent = Agent(reactor)
+        url = url.encode("ascii")
         requested = agent.request(
             b'GET',
             url,
