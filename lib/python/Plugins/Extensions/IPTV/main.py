@@ -24,7 +24,7 @@ from .cache import iconCache
 from .settings import resetVideoConfig, getVideoConfig
 from .settings_home import TVSetupHome
 from .common import fatalError, showBackground
-from .base import trapException, describeException, HttpService
+from .base import trapException, describeException, HttpAgent as HttpService
 from .chlist import TVChannels
 from .utils import trace, getMAC
 from .videos_menu import VideosHome

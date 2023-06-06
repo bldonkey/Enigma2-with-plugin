@@ -65,44 +65,44 @@ def describeException(err):
         return err.getErrorMessage()
 
 
-class HttpService(object):
+# class HttpService(object):
 
-    def __init__(self):
-        model = getBoxModel()
-        self.user_agent = ('enigma2/%s %s' % (VERSION, model)).encode("ascii")
+#     def __init__(self):
+#         model = getBoxModel()
+#         self.user_agent = ('enigma2/%s %s' % (VERSION, model)).encode("ascii")
 
 
-    def getPage(self, url):
-        agent = Agent(reactor)
-        url = url.encode("ascii")
-        requested = agent.request(
-            b'GET',
-            url,
-            Headers({'User-Agent': [self.user_agent]}),
-            None)
-        return requested
+#     def getPage(self, url):
+#         agent = Agent(reactor)
+#         url = url.encode("ascii")
+#         requested = agent.request(
+#             b'GET',
+#             url,
+#             Headers({'User-Agent': [self.user_agent]}),
+#             None)
+#         return requested
 
-    def downloadPage(self, url, filename):
-        # def __init__(self):
-        #     self.url = url
-        #     self.filename = filename
+#     def downloadPage(self, url, filename):
+#         # def __init__(self):
+#         #     self.url = url
+#         #     self.filename = filename
 
-        # def saveFile(self, data):
-        #     file = open(self.filename, 'wb')
-        #     file.write(data)
+#         # def saveFile(self, data):
+#         #     file = open(self.filename, 'wb')
+#         #     file.write(data)
 
-        def saveFile(result):
-            with open(filename, 'wb') as f:
-                f.write(result)
+#         def saveFile(result):
+#             with open(filename, 'wb') as f:
+#                 f.write(result)
 
-        agent = Agent(reactor)
-        url = url.encode("ascii")
-        requested = agent.request(
-            b'GET',
-            url,
-            Headers({'User-Agent': [self.user_agent]}),
-            None)
-        return requested.addCallback(readBody).addCallback(saveFile)
+#         agent = Agent(reactor)
+#         url = url.encode("ascii")
+#         requested = agent.request(
+#             b'GET',
+#             url,
+#             Headers({'User-Agent': [self.user_agent]}),
+#             None)
+#         return requested.addCallback(readBody).addCallback(saveFile)
 
 
 
@@ -111,16 +111,16 @@ class HttpAgent(object):
     def __init__(self):
         model = getBoxModel()
         self.headers = Headers()
-        self.headers.addRawHeader('User-Agent', 'enigma2/%s %s' % (VERSION, model))
+        self.headers.addRawHeader(b'User-Agent', ('enigma2/%s %s' % (VERSION, model).encode("ascii")))
         self.pool = HTTPConnectionPool(reactor, persistent=True)
         self.pool.maxPersistentPerHost = 3
         self.agent = Agent(reactor, pool=self.pool)
 
     def getPage(self, url):
-        return self.agent.request('GET', url, headers=self.headers).addCallback(self._readResponseBody)
+        return self.agent.request(b'GET', url, headers=self.headers).addCallback(self._readResponseBody)
 
     def downloadPage(self, url, filename):
-        return self.agent.request('GET', url, headers=self.headers).addCallback(self._downloadResponseBody, filename)
+        return self.agent.request(b'GET', url, headers=self.headers).addCallback(self._downloadResponseBody, filename)
 
     def shutDown(self):
         self.pool.closeCachedConnections()

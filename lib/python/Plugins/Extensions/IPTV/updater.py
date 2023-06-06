@@ -9,9 +9,11 @@ Therefore we want to have as less imports as possible
 from twisted.internet import reactor
 from twisted.web.client import Agent, readBody
 from twisted.web.http_headers import Headers
+from twisted.internet.protocol import Protocol
 from enigma import quitMainloop
 from Components.Console import Console
 from Screens.MessageBox import MessageBox
+from .base import HttpAgent as HttpService
 from twisted.internet.defer import Deferred, fail
 from . import NAME, VERSION
 from .layer import enigma2Qt, eTimer
@@ -29,38 +31,38 @@ def fatalError(err):
     quitMainloop(5)
 
 
-def getPage(url):
-    agent = Agent(reactor)
-    url = url.encode("ascii")
-    requested = agent.request(
-        b'GET',
-        url,
-        Headers({'User-Agent': [('enigma2/%s' % VERSION).encode("ascii")]}),
-        None)
-    return requested.addErrback(twistedError)
+# def getPage(url):
+#     agent = Agent(reactor)
+#     url = url.encode("ascii")
+#     requested = agent.request(
+#         b'GET',
+#         url,
+#         Headers({'User-Agent': [('enigma2/%s' % VERSION).encode("ascii")]}),
+#         None)
+#     return requested.addErrback(twistedError)
 
 
-def downloadPage(url, filename):
-    # def __init__(self):
-    #     self.url = url
-    #     self.filename = filename
+# def downloadPage(url, filename):
+#     # def __init__(self):
+#     #     self.url = url
+#     #     self.filename = filename
 
-    # def saveFile(self, data):
-    #     file = open(self.filename, 'wb')
-    #     file.write(data)
+#     # def saveFile(self, data):
+#     #     file = open(self.filename, 'wb')
+#     #     file.write(data)
 
-    def saveFile(result):
-        with open(filename, 'wb') as f:
-            f.write(result)
+#     def saveFile(result):
+#         with open(filename, 'wb') as f:
+#             f.write(result)
 
-    agent = Agent(reactor)
-    url = url.encode("ascii")
-    requested = agent.request(
-        b'GET',
-        url,
-        Headers({'User-Agent': [('enigma2/%s' % VERSION).encode("ascii")]}),
-        None)
-    return requested.addCallback(readBody).addCallback(saveFile).addErrback(twistedError)
+#     agent = Agent(reactor)
+#     url = url.encode("ascii")
+#     requested = agent.request(
+#         b'GET',
+#         url,
+#         Headers({'User-Agent': [('enigma2/%s' % VERSION).encode("ascii")]}),
+#         None)
+#     return requested.addCallback(readBody).addCallback(saveFile).addErrback(twistedError)
 
 
 def twistedError(err):
@@ -94,6 +96,7 @@ PREFIX = 'enigma2-plugin-extensions-'
 class Updater(object):
 
     def __init__(self):
+        self.http_service = HttpService()
         self.url = 'http://soft.e-tech.ltd/enigma2/nasche/'
         self._defer = None
         self._installer = None
@@ -120,6 +123,7 @@ class Updater(object):
             print('[IPTV] Installed version:', curVer)
 
             def cb(data):
+                data = data.decode("ascii")
                 nxtVer = parseVersion(data)
                 self._version = nxtVer
                 print('[IPTV] Available version:', nxtVer)
@@ -142,7 +146,7 @@ class Updater(object):
                 self._defer = None
                 return arg
 
-            self._defer = getPage(self.url + 'version.txt')
+            self._defer = self.http_service.getPage((self.url + 'version.txt').encode("ascii"))
             return self._defer.addCallback(cb).addErrback(eb).addBoth(finished)
 
     def installUpdate(self):
@@ -159,7 +163,7 @@ class Updater(object):
                 ext = 'ipk'
             print('[IPTV] download', ver_str, ext)
             file_name = '/tmp/%s.%s' % (NAME, ext)
-            self._installer = downloadPage(self.url + '%s_%s_all.%s' % (PREFIX + NAME.lower(), ver_str, ext), file_name)
+            self._installer = self.http_service.downloadPage((self.url + '%s_%s_all.%s' % (PREFIX + NAME.lower(), ver_str, ext)).encode("ascii"), file_name)
 
             def cb(ret):
                 return self._install(file_name)

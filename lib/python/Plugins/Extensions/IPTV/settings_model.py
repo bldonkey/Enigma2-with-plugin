@@ -15,7 +15,7 @@ from .loc import translate as _
 from .utils import trace, getMAC, getBoxModel, getBoxSerial, getImageInfo
 from .history_model import HistoryModel
 from .schema import ListField, ObjectData, tchoices, tint, tstr, tlist, ChoicesField, tdatetime, toptional, Field, tattr, ttuple
-from .base import HttpService, APIException
+from .base import HttpAgent as HttpService, APIException
 
 class QualitySetting(ChoicesField):
 
@@ -282,7 +282,7 @@ class ServerConfigService(object):
             except ValueError as e:
                 raise APIException('json error: ' + str(e))
 
-        return self.http_service.getPage(self.base_url + urlencode(args)).addCallback(parse)
+        return self.http_service.getPage((self.base_url + urlencode(args)).endoce("ascii")).addCallback(parse)
         
 
 

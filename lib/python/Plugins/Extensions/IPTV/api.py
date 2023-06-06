@@ -76,7 +76,7 @@ class Api(object):
         self.sid = None
         self.authorizing = True
         self.trace('Authorization of username = %s' % self.username)
-        d = self.http_service.getPage(self.authRequest())
+        d = self.http_service.getPage(self.authRequest().encode("ascii"))
         return d.addCallback(self.retProcess).addCallback(self.authCb).addErrback(self.authErr)
 
     def authCb(self, json):
@@ -112,7 +112,7 @@ class Api(object):
 
     def doGet(self, sid, params, depth):
         self.trace('doGet')
-        d = self.http_service.getPage(self.makeRequest(sid, params))
+        d = self.http_service.getPage(self.makeRequest(sid, params).encode("ascii"))
         return d.addCallback(self.retProcess).addErrback(self.getErr, params, depth)
 
     def getErr(self, err, params, depth):

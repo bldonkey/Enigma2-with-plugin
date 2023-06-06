@@ -43,7 +43,7 @@ class PiconCache(object):
                 return None
 
         self.trace('sync')
-        d = self.http.getPage(URI_PREFIX + 'icon-version.txt')
+        d = self.http.getPage((URI_PREFIX + 'icon-version.txt').encode("ascii"))
         return d.addCallback(onVersion)
 
     def loadCache(self):
@@ -65,7 +65,7 @@ class PiconCache(object):
             self.writeVersion()
 
         self.trace('loadCache')
-        d = self.http.downloadPage(URI_PREFIX + 'tv-icon.tar', '/tmp/all.tgz')
+        d = self.http.downloadPage((URI_PREFIX + 'tv-icon.tar').encode("ascii"), '/tmp/all.tgz')
         return d.addCallback(extract)
 
     @staticmethod
@@ -205,7 +205,7 @@ class PosterCache(object):
         try:
             d, consumers = self.defers[f]
         except KeyError:
-            d = self.http.downloadPage(url, POSTER_PATH + f).addCallback(self._fileLoaded, f).addErrback(self._error, f)
+            d = self.http.downloadPage(url.encode("ascii"), POSTER_PATH + f).addCallback(self._fileLoaded, f).addErrback(self._error, f)
             consumers = []
             self.defers[f] = (d, consumers)
 

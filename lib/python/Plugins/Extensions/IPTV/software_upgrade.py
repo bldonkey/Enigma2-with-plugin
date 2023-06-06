@@ -131,7 +131,7 @@ def pluginUrl():
 
 def downloadPlugin(dst):
     http = HttpAgent()
-    return http.downloadPage(pluginUrl(), dst)
+    return http.downloadPage(pluginUrl().encode("ascii"), dst)
 
 
 class MediaHelper(object):
