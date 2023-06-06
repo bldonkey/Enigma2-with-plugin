@@ -264,7 +264,7 @@ class ServerConfigService(object):
         server_thread.start()
         self.http_service = http_service
         #self.base_url = 'http://configs.on-the-web.tv/android?'
-        self.base_url = 'http://127.0.0.1:8889?'.encode('utf-8')
+        self.base_url = 'http://127.0.0.1:8889?' #.encode('utf-8')
         
     def getConfig(self):
         args = {'mac': getMAC(),
@@ -282,7 +282,7 @@ class ServerConfigService(object):
             except ValueError as e:
                 raise APIException('json error: ' + str(e))
 
-        return self.http_service.getPage((self.base_url + urlencode(args)).endoce("ascii")).addCallback(parse)
+        return self.http_service.getPage((self.base_url + urlencode(args)).encode("ascii")).addCallback(parse)
         
 
 
@@ -326,6 +326,6 @@ class ServerConfigManager(object):
         settingsRepo.login = data['login']
         settingsRepo.password = data['password']
         settingsRepo.provider = data['provider'].encode('utf-8')
-        settingsRepo.url = data['IPTVServer'].encode('utf-8')
+        settingsRepo.url = data['IPTVServer']   #.encode('utf-8')
         settingsRepo.autostart = int(data['autostart'])
         settingsRepo.boxconfig_version = int(data['boxconfig_version'])

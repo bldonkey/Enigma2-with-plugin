@@ -111,7 +111,7 @@ class HttpAgent(object):
     def __init__(self):
         model = getBoxModel()
         self.headers = Headers()
-        self.headers.addRawHeader(b'User-Agent', ('enigma2/%s %s' % (VERSION, model).encode("ascii")))
+        self.headers.addRawHeader(b'User-Agent', ('enigma2/%s %s' % (VERSION, model)).encode("ascii"))
         self.pool = HTTPConnectionPool(reactor, persistent=True)
         self.pool.maxPersistentPerHost = 3
         self.agent = Agent(reactor, pool=self.pool)
