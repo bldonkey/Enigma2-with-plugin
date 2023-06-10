@@ -12,11 +12,11 @@ def getMAC(ifname = 'eth0'):
     import struct
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
-        info = fcntl.ioctl(s.fileno(), 35111, struct.pack('256s', ifname[:15]))
+        info = fcntl.ioctl(s.fileno(), 35111, struct.pack('256s', bytes(ifname[:15], 'utf-8')))
     except IOError:
         return '00:00:00:00:00:00'
 
-    return ':'.join([ '%02x' % ord(char) for char in info[18:24] ]).upper()
+    return ':'.join([ '%02x' % b for b in info[18:24] ]).upper()
 
 
 def getBoxModel():

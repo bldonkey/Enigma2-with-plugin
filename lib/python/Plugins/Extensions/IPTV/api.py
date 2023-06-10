@@ -149,7 +149,7 @@ class Api(object):
             return data
 
     def authRequest(self):
-        md5pass = md5(md5(self.username).hexdigest() + md5(self.password).hexdigest()).hexdigest()
+        md5pass = md5(md5(self.username).hexdigest() + md5(self.password).hexdigest()).encode('utf-8').hexdigest()
         print('12345')
         print('%s/login?%s' % (self.code, urlencode({'login': self.username,
           'pass': md5pass,
