@@ -45,11 +45,11 @@ class StyleManager(object):
     def __init__(self):
         style = eWindowStyleSkinned()
         colorsStyle = [('Background', colors['darkgray']),
-         ('LabelForeground', colors['white']),
+         ('Foreground', colors['white']),
          ('ListboxBackground', 1184274),
          ('ListboxForeground', colors['white']),
-         ('ListboxSelectedBackground', 1184274),
-         ('ListboxSelectedForeground', colors['white'])]
+         ('ListboxBackgroundSelected', 1184274),
+         ('ListboxForegroundSelected', colors['white'])]
         borders = [('bpTop', 'IPTV/window/f_h.png'),
          ('bpLeft', 'IPTV/window/f_v.png'),
          ('bpRight', 'IPTV/window/f_v.png'),
